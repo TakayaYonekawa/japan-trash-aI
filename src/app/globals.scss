@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+// =========================================
+// SCSS Variables & Theming
+// =========================================
+$bg-primary: #0f172a;
+$text-primary: #e2e8f0;
+$transition-speed: 0.3s;
+
+@theme {
+  --color-app-gradient-start: #111827;
+  --color-app-gradient-end: #312e81;
+}
+
+@layer base {
+  body {
+    background-color: $bg-primary;
+    color: $text-primary;
+    @apply font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* =========================================
+     SCSS Component Styles with Tailwind Mixins
+     ========================================= */
+
+  @mixin glass-card-mixin {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl;
+    transition: all $transition-speed ease;
+  }
+
+  .shibuya-app {
+    @apply min-h-screen bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 flex items-center justify-center p-4;
+
+    .bg-decoration {
+      @apply absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none;
+
+      &-blob-1 {
+        @apply absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-500/20 rounded-full blur-[120px];
+      }
+      &-blob-2 {
+        @apply absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-fuchsia-500/20 rounded-full blur-[120px];
+      }
+    }
+
+    .main-container {
+      @apply relative w-full max-w-xl z-10 space-y-8;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      @apply text-center space-y-4;
+
+      .icon-wrapper {
+        @apply inline-flex items-center justify-center p-3 bg-white/5 rounded-2xl mb-4 border border-white/10 shadow-xl backdrop-blur-sm;
+      }
+      
+      .title {
+        @apply text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 via-white to-fuchsia-200;
+      }
+
+      .subtitle {
+        @apply text-slate-400 text-lg max-w-sm mx-auto;
+      }
+    }
+
+    /* Glass Morphism Base */
+    .glass-card {
+      @include glass-card-mixin;
+    }
+
+    /* Form Styles */
+    .search-form {
+      @include glass-card-mixin;
+      @apply p-6 md:p-8 space-y-6;
+
+      .input-group {
+        @apply space-y-2;
+
+        label {
+          @apply text-sm font-medium text-slate-300 flex items-center gap-2;
+        }
+
+        input {
+          @apply w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-3 text-white placeholder-slate-500 transition-all;
+          
+          &:focus {
+            @apply outline-none ring-2 ring-indigo-500/50;
+          }
+        }
+      }
+
+      .submit-btn {
+        @apply w-full bg-gradient-to-r from-indigo-500 to-fuchsia-600 text-white font-medium py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2;
+        
+        &:hover:not(:disabled) {
+          @apply from-indigo-400 to-fuchsia-500 shadow-indigo-500/25;
+        }
+
+        &:disabled {
+          @apply opacity-50 cursor-not-allowed;
+        }
+
+        .icon {
+          transition: transform $transition-speed;
+        }
+
+        &:hover:not(:disabled) .icon {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    /* Error and Result Cards */
+    .error-card {
+      @include glass-card-mixin;
+      @apply p-4 border-red-500/30 bg-red-950/20 flex items-start gap-3;
+      
+      p {
+        @apply text-red-200 text-sm;
+      }
+    }
+
+    .result-section {
+      @include glass-card-mixin;
+      @apply p-6 md:p-8 animate-[fadeIn_0.5s_ease-out] border-indigo-500/30;
+      
+      .result-content {
+        @apply flex flex-col items-center text-center space-y-6;
+
+        .category-label {
+          @apply text-sm font-medium text-slate-400 uppercase tracking-wider;
+        }
+
+        .category-value {
+          @apply text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-200;
+        }
+
+        .divider {
+          @apply h-px w-full bg-gradient-to-r from-transparent via-slate-700 to-transparent;
+        }
+
+        .date-value {
+          @apply text-3xl md:text-4xl font-black text-white drop-shadow-md;
+        }
+
+        .reasoning-box {
+          @apply pt-4 border-t border-slate-700/50 w-full text-left;
+          
+          p {
+            @apply text-sm text-slate-300 leading-relaxed bg-slate-900/30 p-4 rounded-xl border border-slate-800/50;
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
