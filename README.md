@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Japan Trash AI
 
-## Getting Started
+ゴミの分別と収集日をAIで検索できるアプリケーションです。
 
-First, run the development server:
+## 本番リンク
+[https://japan-trash-a-i.vercel.app/](https://japan-trash-a-i.vercel.app/)
+
+## 環境構築
+このプロジェクトは以下の技術スタックで構築されています。
+
+### 使用技術・API
+- **Frontend**: [Next.js](https://nextjs.org/) (React 19)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/), [Sass (SCSS)](https://sass-lang.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **AI API**: [OpenAI API](https://openai.com/api/)
+
+### 必要なもの
+- Node.js (v18以降)
+- npm
+
+### インストール
+```bash
+npm install
+```
+
+## .envの書き方
+プロジェクトのルートディレクトリに `.env.local` ファイルを作成し、以下の内容を設定してください。
+※ `env` の中身を直接編集しないでください。
+
+```bash
+OPENAI_API_KEY=あなたのOpenAI_API_キー
+```
+
+## 立ち上げ方
+ローカル開発サーバーを起動します。
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+起動後、ブラウザで [http://localhost:3000](http://localhost:3000) を開いて確認してください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
