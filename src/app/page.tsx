@@ -6,8 +6,11 @@ import { HeroSection } from "@/components/organisms/HeroSection";
 import { SearchForm } from "@/components/organisms/SearchForm";
 import { ResultSection } from "@/components/organisms/ResultSection";
 import { ErrorCard } from "@/components/molecules/ErrorCard";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import { AddressModal } from "@/components/organisms/AddressModal";
+import { Header } from "@/components/organisms/Header";
 
-export default function Home() {
+function Home() {
   const [address, setAddress] = useState("");
   const [trashType, setTrashType] = useState("");
   const [loading, setLoading] = useState(false);
@@ -65,25 +68,36 @@ export default function Home() {
     }
   };
 
+  const handleAddressSaved = (fullAddress: string) => {
+    setAddress(fullAddress);
+  };
+
   const isSameAsLast = lastSubmitted?.address === address && lastSubmitted?.trashType === trashType;
 
   return (
     <MainLayout>
-      <HeroSection />
-      
-      <SearchForm 
-        address={address}
-        setAddress={setAddress}
-        trashType={trashType}
-        setTrashType={setTrashType}
-        onSubmit={handleSubmit}
-        loading={loading}
-        disabled={loading || !address || !trashType || isSameAsLast}
-      />
+      <Header />
+      <div className="pt-20">
+        <AddressModal onAddressSaved={handleAddressSaved} />
+        <HeroSection />
+        
+        <SearchForm 
+          address={address}
+          setAddress={setAddress}
+          trashType={trashType}
+          setTrashType={setTrashType}
+          onSubmit={handleSubmit}
+          loading={loading}
+          disabled={loading || !address || !trashType || isSameAsLast}
+        />
 
-      <ErrorCard message={error} />
-      
-      <ResultSection result={result} loading={loading} />
+        <ErrorCard message={error} />
+        
+        <ResultSection result={result} loading={loading} />
+      </div>
     </MainLayout>
   );
 }
+
+export default Home;
+
